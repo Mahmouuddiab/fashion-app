@@ -109,8 +109,9 @@ class AuthRemoteDsImpl implements AuthRemoteDs {
       );
 
       final user = LoginModel.fromJson(response.data);
-      await CacheHelper.saveToken(user.accessToken);
-      print("user token: ${user.accessToken}");
+      final token = user.accessToken;
+      await CacheHelper.saveToken(token);
+      print("user token: $token");
 
       return unit;
     } on DioException catch (e) {
