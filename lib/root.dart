@@ -1,5 +1,5 @@
 import 'package:fashion_app/features/cart/cart_screen.dart';
-import 'package:fashion_app/features/home/home_screen.dart';
+import 'package:fashion_app/features/home/presentation/screens/home_screen.dart';
 import 'package:fashion_app/features/notifications/notifications_screen.dart';
 import 'package:fashion_app/features/profile/profile_screen.dart';
 import 'package:flutter/material.dart';

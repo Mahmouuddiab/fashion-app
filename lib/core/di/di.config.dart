@@ -21,6 +21,13 @@ import '../../features/auth/domain/usecase/login_usecase.dart' as _i911;
 import '../../features/auth/domain/usecase/register_usecase.dart' as _i769;
 import '../../features/auth/domain/usecase/verify_email_usecase.dart' as _i913;
 import '../../features/auth/presentation/cubit/auth_cubit.dart' as _i117;
+import '../../features/home/data/data%20source/home_remote_ds.dart' as _i520;
+import '../../features/home/data/data%20source/home_remote_ds_impl.dart'
+    as _i740;
+import '../../features/home/data/repository/home_repository_impl.dart' as _i9;
+import '../../features/home/domain/repository/home_repository.dart' as _i541;
+import '../../features/home/domain/usecase/category_usecase.dart' as _i589;
+import '../../features/home/presentation/cubit/home_cubit.dart' as _i9;
 import '../helper/dio_helper.dart' as _i408;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -31,10 +38,18 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.singleton<_i408.DioHelper>(() => _i408.DioHelper());
+    gh.factory<_i520.HomeRemoteDs>(() => _i740.HomeRemoteDsImpl());
+    gh.factory<_i541.HomeRepository>(
+      () => _i9.HomeRepositoryImpl(gh<_i520.HomeRemoteDs>()),
+    );
+    gh.factory<_i589.CategoryUseCase>(
+      () => _i589.CategoryUseCase(gh<_i541.HomeRepository>()),
+    );
     gh.factory<_i6.AuthRemoteDs>(() => _i624.AuthRemoteDsImpl());
     gh.factory<_i961.AuthRepository>(
       () => _i409.AuthRepositoryImpl(gh<_i6.AuthRemoteDs>()),
     );
+    gh.factory<_i9.HomeCubit>(() => _i9.HomeCubit(gh<_i589.CategoryUseCase>()));
     gh.factory<_i911.LoginUseCase>(
       () => _i911.LoginUseCase(gh<_i961.AuthRepository>()),
     );
